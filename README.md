@@ -4,6 +4,21 @@ Avionics firmware for the **Jack Kenney Launch System (JKLS)** flight computer. 
 
 ---
 
+## Safety / Project Status
+
+This was an experimental learning project, built as a "figure it out myself" flight computer rather than a certified or flight-proven avionics system. It should be treated as prototype code and hardware.
+
+Important limitations:
+
+- There is **no proper hardware safety interlock** in this design.
+- The launch mode button is a software arm / abort input, not an independent pyrotechnic safing system.
+- The ejection output can be driven directly by firmware state, so any real flight build should add physical safing, continuity checks, and ground-test procedures before use.
+- This system has not been flight-tested as-is.
+
+Anyone revisiting this project should treat the ejection circuit and deployment logic with appropriate caution, follow local rocketry rules, and validate the full system on the bench before considering a launch.
+
+---
+
 ## Features
 
 - **Barometric altitude tracking** via BMP388 sensor (80 ms update rate)
@@ -12,7 +27,7 @@ Avionics firmware for the **Jack Kenney Launch System (JKLS)** flight computer. 
 - **SD card data logging** — altitude and timestamps written to `data.csv` in real time
 - **Post-flight summary** — apogee altitude, time of apogee, and total flight time appended to the log
 - **Status LED** — blink patterns indicate initialisation, launch mode, and flight state
-- **Launch arm / abort button** — arms the system pre-launch; pressing during flight cancels and returns to pre-launch state
+- **Software arm / abort button** — arms the system pre-launch; pressing during flight cancels and returns to pre-launch state
 
 ---
 

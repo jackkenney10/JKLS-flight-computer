@@ -4,9 +4,18 @@ Avionics firmware for the **Jack Kenney Launch System (JKLS)** flight computer. 
 
 ---
 
+## Lessons Learned
+
+This project was as much about learning embedded systems and rocketry design as it was about building a working flight computer.
+
+- **Memory constraints matter.** The target microcontroller had only 2 KB of SRAM, which shaped a lot of implementation choices. Many `Serial.println()` debug statements are commented out because even small strings can consume precious RAM on AVR-based Arduino boards.
+- **Simple algorithms can be effective.** The apogee detector was designed from first principles using a small rolling window of altitude measurements rather than a complicated model. The logic was also checked with pen-and-paper simulations using the free-fall equation from differential equations coursework.
+- **Bench testing matters.** The ejection output was tested with a Christmas light in place of an ejection charge, confirming that the output activated when the simulated altitude profile reached apogee.
+- **Safety systems should be researched, not improvised.** A future version should use established recovery-avionics practices, including a real hardware safing mechanism, continuity checks, and clear arming procedures. This project was a valuable learning exercise, but it also showed why critical flight and deployment systems deserve more than a purely DIY approach.
+
 ## Safety / Project Status
 
-This was an experimental learning project, built as a "figure it out myself" flight computer rather than a certified or flight-proven avionics system. It should be treated as prototype code and hardware.
+This was an experimental learning project, built mostly from first principles as a way to understand flight computer design rather than as a certified or flight-proven avionics system. It should be treated as prototype code and hardware.
 
 Important limitations:
 
@@ -15,7 +24,9 @@ Important limitations:
 - The ejection output can be driven directly by firmware state, so any real flight build should add physical safing, continuity checks, and ground-test procedures before use.
 - This system has not been flight-tested as-is.
 
-Anyone revisiting this project should treat the ejection circuit and deployment logic with appropriate caution, follow local rocketry rules, and validate the full system on the bench before considering a launch.
+Anyone revisiting this project should treat the ejection circuit and deployment logic with appropriate caution, follow local rocketry rules, research established recovery-system practices, and validate the full system on the bench before considering a launch.
+
+The firmware and deployment logic were bench-tested, including substituting a Christmas light for the ejection charge to verify apogee-trigger behavior, but the full system was never flown.
 
 ---
 
